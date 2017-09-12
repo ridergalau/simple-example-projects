@@ -1,4 +1,2 @@
-# git-projects-sample-code
-# git-projects-sample-code
-# git-projects-sample-code
 # simple-example-projects
+Ini adalah catatan / contoh code java
