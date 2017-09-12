@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
@@ -23,6 +25,9 @@ public class SparkMongoGet {
 	final static JavaSparkContext JSC = new JavaSparkContext(SPARK.sparkContext());
 
 	public static void main(String[] args) {
+
+		Logger rootLogger = Logger.getRootLogger();
+		rootLogger.setLevel(Level.ERROR);
 
 		JavaRDD<Document> rdd = MongoSpark.load(JSC).filter(new Function<Document, Boolean>() {
 			@Override
