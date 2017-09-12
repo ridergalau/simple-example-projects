@@ -16,7 +16,7 @@ public static void main(String[] args) {
 	//Connect to Database
 	MongoClient mongoClient=new MongoClient("192.168.20.75",27017);
 	DB db=mongoClient.getDB("test-create");
-	System.out.println("Your connection to DB is ready for Use::"+db);
+	System.out.println("Database Connected:: "+db);
 
 	//Create Collection
 //
@@ -26,7 +26,7 @@ public static void main(String[] args) {
 	for (String part : parts) {
 
 		DBCollection linked=db.createCollection(part,new BasicDBObject()); 
-		System.out.println("Collection created successfully "+part);
+		System.out.println("Created Coll successfully "+part);
 	}
 	
 	}

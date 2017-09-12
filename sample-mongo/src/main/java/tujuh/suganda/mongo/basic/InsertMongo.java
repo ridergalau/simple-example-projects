@@ -16,8 +16,8 @@ public static void main(String[] args) {
 		BasicDBObject doc = new BasicDBObject("_id","peg_"+x).
 				append("nama", "Isabela"+x).
 	            append("alamat", "ciamis"+x).
-	            append("no_hp", "081312651652,"+x).
-	            append("email", "didon.roll@gmail.com"+x).
+	            append("no_hp", "08528618792,"+x).
+	            append("email", "didon.rolsl@gmail.com"+x).
 	            append("noRumah", "Blok no 989"+x);
 	         col.insert(doc);
 	         System.out.println("Document inserted successfully ke-"+x);	

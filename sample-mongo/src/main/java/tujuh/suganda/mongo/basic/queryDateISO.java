@@ -38,8 +38,8 @@ public class queryDateISO {
 		System.out.println("--> " + timestampToDate(to));
 
 		try {
-			MongoClient cli = new MongoClient("192.168.20.139", 27017);
-			DB db = cli.getDB("social_media_analysis");
+			MongoClient cli = new MongoClient("localhost", 27017);
+			DB db = cli.getDB("social_data");
 			DBCollection collection = db.getCollection("sma_post");
 			// DBCursor cursor = collection.find().limit(10);
 
