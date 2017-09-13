@@ -5,4 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>json-example</name>
   <description>json-example-project</description>
+  <dependencies>
+  	<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+  </dependencies>
 </project>
