@@ -8,19 +8,19 @@ import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
 
 public class InsertMongoJson {
-public static void main(String[] args) {
-	MongoClient mongo = new MongoClient("localhost", 27017);
-	DB db = mongo.getDB("pegawai");	
-	DBCollection col = db.getCollection("datanya");	
-	
-	try {
-		String json = "{'_id':'mencobajason','name':'mkyong', 'age':30}";
-		DBObject dbObject = (DBObject)JSON.parse(json);
-		col.insert(dbObject);
-		System.out.println("Insert Json Berhasil!");
-	} catch (Exception e) {
-System.out.println("GAGAL");
-	}
+	public static void main(String[] args) {
+		MongoClient mongo = new MongoClient("localhost", 27017);
+		DB db = mongo.getDB("pegawai");
+		DBCollection col = db.getCollection("datanya");
 
-}
+		try {
+			String json = "{'_id':'mencobajason','name':'Suganda', 'age':23}";
+			DBObject dbObject = (DBObject) JSON.parse(json);
+			col.insert(dbObject);
+			System.out.println("Insert Json Berhasil!");
+		} catch (Exception e) {
+			System.out.println("GAGAL");
+		}
+
+	}
 }

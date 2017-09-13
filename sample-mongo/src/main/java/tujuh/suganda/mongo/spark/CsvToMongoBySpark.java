@@ -2,8 +2,6 @@ package tujuh.suganda.mongo.spark;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaRDD;
@@ -18,7 +16,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.spark.MongoSpark;
-import com.mongodb.spark.config.WriteConfig;
 import com.mongodb.util.JSON;
 import tujuh.suganda.mongo.model.MyModel;
 
@@ -26,8 +23,7 @@ public class CsvToMongoBySpark implements Serializable {
 	public static void main(String[] args) throws IOException {
 		SparkSession spark = SparkSession.builder().master("local").appName("MongoSparkSample")
 				.config("spark.mongodb.input.uri", "mongodb://127.0.0.1/mydb.data")
-				.config("spark.mongodb.output.uri", "mongodb://127.0.0.1/mydb.data")
-				.getOrCreate();
+				.config("spark.mongodb.output.uri", "mongodb://127.0.0.1/mydb.data").getOrCreate();
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
 
 		Logger rootLogger = Logger.getRootLogger();

@@ -16,10 +16,13 @@ public class UpdateDoc {
 			updatenya.put("age", 30);
 			updatenya.put("alamat", "Ciamis");
 			updatenya.put("e-mail", "ani.ini@gmail.com");
+			
 			BasicDBObject CariDataYangDiubah = new BasicDBObject().append("_key", "peg_1");
+			
 			collection.update(CariDataYangDiubah, updatenya);
 			System.out.println("Data TerUpdate!");
 		} catch (Exception e) {
-			System.out.println("GAGAL TerUpdate!");}
+			System.out.println("GAGAL TerUpdate!");
+		}
 	}
 }
