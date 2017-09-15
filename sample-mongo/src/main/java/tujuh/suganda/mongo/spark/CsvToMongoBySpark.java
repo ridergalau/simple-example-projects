@@ -24,6 +24,7 @@ public class CsvToMongoBySpark implements Serializable {
 		SparkSession spark = SparkSession.builder().master("local").appName("MongoSparkSample")
 				.config("spark.mongodb.input.uri", "mongodb://127.0.0.1/mydb.data")
 				.config("spark.mongodb.output.uri", "mongodb://127.0.0.1/mydb.data").getOrCreate();
+	
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
 
 		Logger rootLogger = Logger.getRootLogger();
