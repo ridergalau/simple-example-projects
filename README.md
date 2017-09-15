@@ -1,3 +1,3 @@
-# simple-example-projects
-Ini adalah catatan / contoh code java
-Sebagai bahan pengingat
+# KUMPULAN CONTOH PROJECT BASIC
+dibuat untuk catatan / contoh code java
+- Sebagai bahan pengingat
