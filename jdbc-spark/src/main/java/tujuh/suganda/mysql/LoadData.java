@@ -36,10 +36,10 @@ public class LoadData implements Serializable {
 		options.put("upperBound", "499999");
 		options.put("numPartitions", "10");
 
-		Dataset<Row> jdbcDF = sqlContext.load("jdbc", options);
-		jdbcDF.show();
+		Dataset<Row> RowDs = sqlContext.load("jdbc", options);
+		RowDs.show();
 
-		List<Row> employeeFullNameRows = jdbcDF.collectAsList();
+		List<Row> employeeFullNameRows = RowDs.collectAsList();
 		for (Row employeeFullNameRow : employeeFullNameRows) {
 			System.out.println("-> " + employeeFullNameRow);
 		}

@@ -1,11 +1,12 @@
-package tujuh.suganda.mysql;
+package tujuh.suganda.postgree;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Level;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -14,22 +15,18 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
-public class SaveDSJsonFile implements Serializable {
-	private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(LoadData.class);
-
-	private static final String MYSQL_USERNAME = "root";
-	private static final String MYSQL_PWD = "aing";
-	private static final String MYSQL_CONNECTION_URL = "jdbc:mysql://localhost:3306/mydb?user=" + MYSQL_USERNAME
-			+ "&password=" + MYSQL_PWD;
+public class SaveDSJsonFIle implements Serializable {
+	private static final String POSTGRE_USERNAME = "postgres";
+	private static final String POSTGRE_PWD = "aing";
+	private static final String POSTGRE_CONNECTION_URL = "jdbc:postgresql://127.0.0.1:5432/mydb?user="
+			+ POSTGRE_USERNAME + "&password=" + POSTGRE_PWD;
 
 	private static final JavaSparkContext sc = new JavaSparkContext(
-			new SparkConf().setAppName("SparkSaveToDb").setMaster("local[*]"));
+			new SparkConf().setAppName("SparkSaveToPostgre").setMaster("local[*]"));
 
 	private static final SQLContext sqlContext = new SQLContext(sc);
 
 	public static void main(String[] args) {
-		LOGGER.setLevel(Level.OFF);
-
 		final Properties connectionProperties = new Properties();
 
 		StructType schema = DataTypes
@@ -41,16 +38,19 @@ public class SaveDSJsonFile implements Serializable {
 						DataTypes.createStructField("ip", DataTypes.StringType, true) });
 
 		// LOAD DATA FROM FILE
-		Dataset<Row> RowDs = sqlContext.jsonFile("src/main/resources/users.json", schema);
-		RowDs.show(10);
-		// insert With Creating new Table
-		RowDs.write().jdbc(MYSQL_CONNECTION_URL, "data", connectionProperties);
+		Dataset<Row> DsJdbc = sqlContext.jsonFile("src/main/resources/users.json", schema);
+
+		DsJdbc.show();
 
 		// insert to existing table
 		// overwrite or append
-		RowDs.write().mode("append").jdbc(MYSQL_CONNECTION_URL, "person", connectionProperties);
+		DsJdbc.write().mode("append").jdbc(POSTGRE_CONNECTION_URL, "newdata", connectionProperties);
+		// insert With Creating new Table
+		DsJdbc.write().jdbc(POSTGRE_CONNECTION_URL, "data", connectionProperties);
 
-		RowDs.show(20);
-		System.out.println("---------FINISH---------");
+		// save to csv
+		DsJdbc.write().mode("append").csv("/home/Documents/TEST.csv");
+
+		System.out.println("OKE");
 	}
 }

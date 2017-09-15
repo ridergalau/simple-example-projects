@@ -42,27 +42,27 @@ public class SaveDSJsonRDD implements Serializable {
 						DataTypes.createStructField("country", DataTypes.StringType, true),
 						DataTypes.createStructField("ip", DataTypes.StringType, true) });
 
-		List<String> schemaList = new ArrayList<String>();
-		schemaList.add(
+		List<String> JsonList = new ArrayList<String>();
+		JsonList.add(
 				"{\"id\":1,\"name\":\"Suganda7\",\"email\":\"suganda7@google.co.uk\",\"city\":\"Évry\",\"country\":\"France\",\"ip\":\"199.63.123.157\"}");
-		schemaList.add(
+		JsonList.add(
 				"{\"id\":2,\"name\":\"Cinis\",\"email\":\"cinsis@google.co.uk\",\"city\":\"Évry\",\"country\":\"France\",\"ip\":\"199.63.123.157\"}");
-		schemaList.add(
+		JsonList.add(
 				"{\"id\":3,\"name\":\"Bat\",\"email\":\"batman0@google.co.uk\",\"city\":\"Évry\",\"country\":\"France\",\"ip\":\"199.63.123.157\"}");
-		schemaList.add(
+		JsonList.add(
 				"{\"id\":5,\"name\":\"Oke\",\"email\":\"okemans0@google.co.uk\",\"city\":\"Évry\",\"country\":\"France\",\"ip\":\"199.63.123.157\"}");
 
 		// Add list Json to JavaRDD
-		JavaRDD<String> json = sc.parallelize(schemaList);
+		JavaRDD<String> json = sc.parallelize(JsonList);
 
-		Dataset<Row> usersDfs = sqlContext.jsonRDD(json, schema);
+		Dataset<Row> RowDs = sqlContext.jsonRDD(json, schema);
 
-		usersDfs.show(20);
+		RowDs.show(20);
 		// insert to existing table
-		usersDfs.write().mode("append").jdbc(MYSQL_CONNECTION_URL, "person", connectionProperties);
+		RowDs.write().mode("append").jdbc(MYSQL_CONNECTION_URL, "person", connectionProperties);
 
 		// insert With Creating new Table
-		usersDfs.write().jdbc(MYSQL_CONNECTION_URL, "person", connectionProperties);
+		RowDs.write().jdbc(MYSQL_CONNECTION_URL, "person", connectionProperties);
 
 		System.out.println("---------FINISH---------");
 	}
