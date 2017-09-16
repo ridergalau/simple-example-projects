@@ -1,5 +1,6 @@
 #GraphDb with Arango
-Arango 3.2.3 Community Edition
+
+Version : Arango 3.2.3 Community Edition
 
  Schema : /src/main/resources/schema Arango example
 -----------------------------------------------------------------------------------------------------------------
