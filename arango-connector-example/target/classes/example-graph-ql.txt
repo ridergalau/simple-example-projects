@@ -1,0 +1,35 @@
+# GraQl for Show graph, with start node 'person/id01'
+FOR v, e, p IN 1..5 ANY 'person/id01' GRAPH 'mygraph'
+  RETURN DISTINCT p
+
+# GraQl for Show graph multiple startnode(id) when id of person inserted >= 1 minutes ago
+FOR vertex IN(
+       (for v in person
+        filter v.time>=(DATE_TIMESTAMP(DATE_NOW()) - (6*10000))
+        return v._id) 
+    )
+    FOR v, e, p IN 1..5 ANY vertex GRAPH 'mygraph' OPTIONS { uniqueVertices: true }
+  RETURN DISTINCT p
+
+# Query For Count or find the most INBOUND of nodes
+FOR doc IN person 
+  LET inEdgesCount = LENGTH(FOR v IN 1..1 INBOUND doc GRAPH 'mygraph' RETURN v)  SORT inEdgesCount DESC LIMIT 5
+ return {"name":doc.firstname,"sum inEdge":inEdgesCount}
+  
+# Query For find the most nodes base on edge 'friendedge'
+    FOR u IN friendedge
+  COLLECT to = u._to WITH COUNT INTO length
+  SORT length DESC
+  LIMIT 10
+  RETURN { 
+    "to" : to, 
+    "count" : length 
+  }
+  
+ # Query for show the graph multiple node in many vertices
+    FOR vertex IN UNION(
+        (FOR v IN person RETURN v._id),
+        (FOR v IN car RETURN v._id)
+    )
+    FOR v, e, p IN 1..5 OUTBOUND vertex GRAPH 'mygraph' OPTIONS { uniqueVertices: true }
+    RETURN p

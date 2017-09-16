@@ -58,11 +58,15 @@ public class SparkStoredToOrient {
 					}
 				});
 
+		// SCALA PROJECT EXAMPLE
+		// https://dzone.com/articles/apache-spark-datasource-for-orientdb
+
 		try {
 			// Stored to Orient
 			DataFrameWriter<Row> usersDfs = sqlContext.createDataFrame(dataRdd, MyModel.class).write().format(formatDoc)
 					.options(orientConfig).mode(SaveMode.Append);
 			usersDfs.save();
+			
 			System.out.println("---FINISH---");
 		} catch (Exception e) {
 			e.printStackTrace();
