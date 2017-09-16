@@ -1,12 +1,12 @@
 #GraphDb with Arango
-arangosh --server.endpoint tcp://127.0.0.1:8530
-db._useDatabase("dbperson"):
+#arangosh --server.endpoint tcp://127.0.0.1:8530
+#db._useDatabase("dbperson"):
 
-db._create("person");
-db.person.ensureIndex({ type: "hash", fields: [ "firstname" ]});
-db.person.ensureIndex({ type: "hash", fields: [ "lastname" ]});
-db.person.ensureIndex({ type: "hash", fields: [ "address" ]});
-db.person.ensureIndex({ type: "hash", fields: [ "hobies" ]});
+#db._create("person");
+#db.person.ensureIndex({ type: "hash", fields: [ "firstname" ]});
+#db.person.ensureIndex({ type: "hash", fields: [ "lastname" ]});
+#db.person.ensureIndex({ type: "hash", fields: [ "address" ]});
+#db.person.ensureIndex({ type: "hash", fields: [ "hobies" ]});
 db.person.ensureIndex({ type: "hash", fields: [ "timestamp" ]});
 db.person.ensureIndex({ type: "hash", fields: [ "gender" ]});
 db.person.ensureIndex({ type: "hash", fields: [ "email" ]});
