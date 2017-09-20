@@ -30,10 +30,10 @@ import java.util.Iterator;
 public class ExampleTwitterStreaming {
 
 	public static void main(String[] args) {
-		String consumerKey = "nUKkFZ7aEwnnpmpR0SmJsidHI";
-		String consumerSecret = "fUaKgtJCE0Btrljgq844CsfFPwlRYMiC6REbTPS3dm4f50d4e8";
-		String accessToken = "892336234160193536-knj2aaB4CCIp2U5sHFE0O39EMSJqOzT";
-		String accessTokenSecret = "BsWPxAbvE2MlDpnFkqgnz6fVDj8pkmUuwE58Y0Lq5hkMm";
+		String consumerKey = args[0];
+		String consumerSecret = args[1];
+		String accessToken = args[2];
+		String accessTokenSecret = args[3];
 
 		String[] filters = new String[] { "jokowi", "indonesia", "polri", "polisi" };
 
