@@ -23,11 +23,11 @@ public class DataExample {
 
 	public static Collection<HasCarEdge> carRelations() {
 		Collection<HasCarEdge> data = new ArrayList<HasCarEdge>();
-		List<String> friend = new ArrayList<>();
-		friend.add("keyRider_B07SG");
-		friend.add("keyLaura_B6822MLS");
+		List<String> carOwner = new ArrayList<>();
+		carOwner.add("keyRider_B07SG");
+		carOwner.add("keyLaura_B6822MLS");
 
-		for (Iterator iterator = friend.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = carOwner.iterator(); iterator.hasNext();) {
 			String key = (String) iterator.next();
 			String[] part = key.split("_");
 			HasCarEdge child = new HasCarEdge(key, "person/" + part[0], "car/" + part[1],

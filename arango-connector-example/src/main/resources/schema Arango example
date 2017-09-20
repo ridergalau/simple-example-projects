@@ -1,4 +1,3 @@
-
 arangosh --server.endpoint tcp://127.0.0.1:8530
 
 db._useDatabase("dbperson"):

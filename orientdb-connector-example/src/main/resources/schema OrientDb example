@@ -1,0 +1,41 @@
+....Create Database and schema in your orient console....
+
+#CREATE DATABASE remote:127.0.0.1/dbperson root mypass plocal
+
+CREATE CLASS Person EXTENDS V
+CREATE PROPERTY Person._key String
+CREATE PROPERTY Person.firstname String
+CREATE PROPERTY Person.address EMBEDDEDMAP
+CREATE PROPERTY Person.hobies EMBEDDEDLIST
+CREATE PROPERTY Person.timestamp LONG
+CREATE PROPERTY Person.gender String
+CREATE PROPERTY Person.email String
+create index Person._key unique
+CREATE INDEX Person.address ON person(address) FULLTEXT ENGINE LUCENE
+
+CREATE CLASS Car EXTENDS V
+CREATE PROPERTY Car.no_car String
+CREATE PROPERTY Car.merk String
+CREATE PROPERTY Car.color String
+CREATE PROPERTY Car.manufacture String
+CREATE PROPERTY Car.timestamp LONG
+CREATE PROPERTY Car.category String
+create index Car.no_car unique
+
+
+CREATE CLASS CarEdge EXTENDS E
+CREATE PROPERTY CarEdge.edge_id String
+CREATE PROPERTY CarEdge.timestamp LONG
+create index CarEdge.edge_id unique
+
+CREATE CLASS ChildEdge EXTENDS E
+CREATE PROPERTY ChildEdge.edge_id String
+CREATE PROPERTY ChildEdge.timestamp LONG
+create index ChildEdge.edge_id unique
+
+
+CREATE CLASS FriendEdge EXTENDS E
+CREATE PROPERTY FriendEdge.edge_id String
+CREATE PROPERTY FriendEdge.timestamp LONG
+create index FriendEdge.edge_id unique
+
