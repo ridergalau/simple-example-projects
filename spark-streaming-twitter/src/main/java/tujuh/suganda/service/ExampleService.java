@@ -12,8 +12,9 @@ public class ExampleService {
 	static KafkaConfig conf = new KafkaConfig();
 	final static String TOPIC = "test";
 	final static Producer<Long, String> producer = conf.createProducer();
+	
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		insert("sss");
+		insert("test Insert");
 	}
 
 	public static void insert(String message) throws InterruptedException, ExecutionException {

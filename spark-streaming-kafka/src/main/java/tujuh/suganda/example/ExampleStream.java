@@ -19,7 +19,7 @@ import org.apache.spark.streaming.kafka.KafkaUtils;
 import scala.Tuple2;
 public class ExampleStream implements Serializable {
 	private final static String kafkaTopic = "sample-topic";
-	private final static String zkHost = "localhosy:2181";
+	private final static String zkHost = "localhost:2181";
 	private final static String groupName = "ExampleStream";
 
 	public static void main(String[] args) throws InterruptedException,
