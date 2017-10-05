@@ -20,14 +20,12 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 import kafka.serializer.StringDecoder;
 
 public class ExampleDirectStream implements Serializable {
-	private final static String KAFKATOPIC = "sc-fb-about";
-	private final static String GROUPNAME = "mly_sample_14";
-	private final static String COLLECTION = "monitor-smartcrawler";
+	private final static String KAFKATOPIC = "sample-topic";
+	private final static String GROUPNAME = "group-spark";
 
 	public static void main(String[] args) throws InterruptedException,
 			IOException {
@@ -35,11 +33,11 @@ public class ExampleDirectStream implements Serializable {
 		System.out.println("topic -> " + KAFKATOPIC);
 		System.out.println("offset -> " + offset);
 		Date date = new Date();
-		String brokers = "namenode01.cluster2.ph:6667,namenode02.cluster2.ph:6667,master02.cluster2.ph:6667,kafka01.cluster2.ph:6667";
+		String brokers = "mybrokers";
 
 //		SparkConf sparkConf = new SparkConf();
 		SparkConf sparkConf = new SparkConf().setAppName(
-				"ProfilingGraphFacebook").setMaster("local[2]");
+				"ExampleDirectStream").setMaster("local[2]");
 
 		JavaStreamingContext jssc = new JavaStreamingContext(sparkConf,
 				new Duration(1000));

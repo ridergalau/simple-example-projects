@@ -18,15 +18,14 @@ import org.apache.spark.streaming.kafka.KafkaUtils;
 
 import scala.Tuple2;
 public class ExampleStream implements Serializable {
-	private final static String kafkaTopic = "ipa_clustering_tw";
-	// private final static String kafkaTopic = "twitter_pilkada";
-	private final static String zkHost = "namenode01.cluster2.ph:2181,namenode02.cluster2.ph:2181";
-	private final static String groupName = "mly_sample_17";
+	private final static String kafkaTopic = "sample-topic";
+	private final static String zkHost = "localhosy:2181";
+	private final static String groupName = "ExampleStream";
 
 	public static void main(String[] args) throws InterruptedException,
 			IOException {
 
-		SparkConf sparkConf = new SparkConf().setAppName("test").setMaster(
+		SparkConf sparkConf = new SparkConf().setAppName("ExampleStream").setMaster(
 				"local[2]");
 
 		// SparkConf sparkConf = new SparkConf();
