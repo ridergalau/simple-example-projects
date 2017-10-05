@@ -32,7 +32,6 @@ public class ExampleDirectStream implements Serializable {
 		String offset = "smallest";
 		System.out.println("topic -> " + KAFKATOPIC);
 		System.out.println("offset -> " + offset);
-		Date date = new Date();
 		String brokers = "mybrokers";
 
 //		SparkConf sparkConf = new SparkConf();

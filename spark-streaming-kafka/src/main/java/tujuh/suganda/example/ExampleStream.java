@@ -47,7 +47,7 @@ public class ExampleStream implements Serializable {
 //					}
 //				});
 
-		// Supaya tidak Duplicate
+		// Remove Duplicate Rdd
 		JavaDStream<String> lines = messages.map(
 				new Function<Tuple2<String, String>, String>() {
 					public String call(final Tuple2<String, String> data){
