@@ -11,6 +11,8 @@ public class DeleteDocument {
 
 	public static void main(String[] args) {
 	
+		
+		
 	OrientGraph graph = orientConf.connectGraph();
 	String key = "Sulung Suganda";
 	try (OObjectDatabaseTx database = orientConf.connectDatabase()) {

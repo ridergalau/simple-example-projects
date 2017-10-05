@@ -43,9 +43,10 @@ public class Config {
 		return db;
 	}
 
-/*	public static ODatabaseDocument connectDBdocTx() {
-		ODatabaseDocument dbDoc = new ODatabaseDocument("remote:" + SERVER + "/" + DB).open(USER, PASSWORD);
+	public static ODatabaseDocument connectDBdocTx() {
+		ODatabaseDocument dbDoc = new ODatabaseDocumentTx("remote:" + SERVER + "/" + DB);
+		dbDoc.open(USER, PASSWORD);
 		return dbDoc;
-	}*/
+	}
 
 }

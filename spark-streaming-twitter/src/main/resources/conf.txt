@@ -1,0 +1,5 @@
+
+		System.setProperty("twitter4j.oauth.consumerKey", "nUKkFZ7aEwnnpmpR0SmJsidHI");
+		System.setProperty("twitter4j.oauth.consumerSecret", "fUaKgtJCE0Btrljgq844CsfFPwlRYMiC6REbTPS3dm4f50d4e8");
+		System.setProperty("twitter4j.oauth.accessToken", "892336234160193536-knj2aaB4CCIp2U5sHFE0O39EMSJqOzT");
+		System.setProperty("twitter4j.oauth.accessTokenSecret", "BsWPxAbvE2MlDpnFkqgnz6fVDj8pkmUuwE58Y0Lq5hkMm");

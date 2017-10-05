@@ -116,6 +116,12 @@ public class MyModel implements Serializable{
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+	@Override
+	public String toString() {
+		return "MyModel [_id=" + _id + ", street=" + street + ", city=" + city + ", zip=" + zip + ", state=" + state
+				+ ", beds=" + beds + ", baths=" + baths + ", sq__ft=" + sq__ft + ", type=" + type + ", sale_date="
+				+ sale_date + ", price=" + price + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+	}
 	
 
 	

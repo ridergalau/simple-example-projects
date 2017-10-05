@@ -30,12 +30,12 @@ public class InsertByMap {
 
 		String id = "idRider";
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		jsonMap.put("user","Rider Galau");
-		jsonMap.put("datepost","2017-19-09");
-		jsonMap.put("address","Jakarta");
-		jsonMap.put("age",34);
-		jsonMap.put("status","Maried");
-		
+		jsonMap.put("user", "Rider Galau");
+		jsonMap.put("datepost", "2017-19-09");
+		jsonMap.put("address", "Jakarta");
+		jsonMap.put("age", 34);
+		jsonMap.put("status", "Maried");
+
 		IndexResponse response = client.prepareIndex("myfirstindex", "myfirsttype", id)
 				.setSource(jsonMap, XContentType.JSON).get();
 		System.out.println("OKE");

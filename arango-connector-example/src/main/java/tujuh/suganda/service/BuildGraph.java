@@ -3,6 +3,8 @@ package tujuh.suganda.service;
 import java.util.Collection;
 import java.util.Date;
 import com.arangodb.ArangoDB;
+
+import tujuh.arangoconfig.Configs;
 import tujuh.suganda.model.edges.HasCarEdge;
 import tujuh.suganda.model.edges.HasChildEdge;
 import tujuh.suganda.model.edges.HasFriendEdge;
@@ -17,7 +19,8 @@ public class BuildGraph {
 	final static String PASS = "aing";
 	final static String DB = "dbperson";
 	final static String COLL = "person";
-	final static ArangoDB arango = new ArangoDB.Builder().host(SERVER).port(PORT).user(USER).password(PASS).build();
+	final static Configs arangoConfig = new Configs();
+	final static ArangoDB arango = arangoConfig.connect();
 
 	public void insertPerson(Collection<PersonModel> person) {
 		try {
