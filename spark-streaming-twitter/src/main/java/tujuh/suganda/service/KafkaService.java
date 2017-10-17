@@ -6,9 +6,9 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
-import tujuh.suganda.service.kafkaconf.KafkaConfig;
+import tujuh.suganda.config.KafkaConfig;
 
-public class ExampleService {
+public class KafkaService {
 	static KafkaConfig conf = new KafkaConfig();
 	final static String TOPIC = "test";
 	final static Producer<Long, String> producer = conf.createProducer();

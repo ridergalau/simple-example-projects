@@ -24,6 +24,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 public class ExampleTwitterStreaming {
+	static KafkaService Kafka = new KafkaService();
+	static NsqService Nsq = new NsqService();
+
 	public static void main(String[] args) {
 
 		/*
@@ -32,19 +35,17 @@ public class ExampleTwitterStreaming {
 		 */
 		String[] filters = new String[] { "jokowi", "indonesia", "polri", "polisi" };
 
-	    String consumerKey = args[0];
-	    String consumerSecret = args[1];
-	    String accessToken = args[2];
-	    String accessTokenSecret = args[3];
-	    
-		 
-		  System.setProperty("twitter4j.oauth.consumerKey", consumerKey);
-		   System.setProperty("twitter4j.oauth.consumerSecret", consumerSecret);
-		   System.setProperty("twitter4j.oauth.accessToken", accessToken);
-		   System.setProperty("twitter4j.oauth.accessTokenSecret", accessTokenSecret);
-		 
+		String consumerKey = args[0];
+		String consumerSecret = args[1];
+		String accessToken = args[2];
+		String accessTokenSecret = args[3];
 
-		SparkConf sparkConf = new SparkConf().setAppName("JavaSparkStreamTwitter");
+		System.setProperty("twitter4j.oauth.consumerKey", consumerKey);
+		System.setProperty("twitter4j.oauth.consumerSecret", consumerSecret);
+		System.setProperty("twitter4j.oauth.accessToken", accessToken);
+		System.setProperty("twitter4j.oauth.accessTokenSecret", accessTokenSecret);
+
+		SparkConf sparkConf = new SparkConf().setAppName("JavaExampleSparkStreamTwitter");
 
 		if (!sparkConf.contains("spark.master")) {
 			sparkConf.setMaster("local[3]");
@@ -80,7 +81,9 @@ public class ExampleTwitterStreaming {
 				rdd.foreach(new VoidFunction<String>() {
 					@Override
 					public void call(String arg0) throws Exception {
-						ExampleService Kafka = new ExampleService();
+						// Stored to Nsq
+						Nsq.insert("aing", arg0);
+						// Stored to Kafka
 						Kafka.insert(arg0);
 					}
 				});

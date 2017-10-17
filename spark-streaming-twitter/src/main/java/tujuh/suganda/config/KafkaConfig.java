@@ -1,4 +1,4 @@
-package tujuh.suganda.service.kafkaconf;
+package tujuh.suganda.config;
 
 import java.util.Properties;
 

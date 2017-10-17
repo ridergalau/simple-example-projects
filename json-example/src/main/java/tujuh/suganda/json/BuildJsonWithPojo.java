@@ -38,6 +38,7 @@ public class BuildJsonWithPojo {
 		sModel.setParent(parent);
 
 		Map<String, String> addres = new HashMap<String, String>();
+		
 		addres.put("city", "Ciamis");
 		addres.put("zipcode", "46252");
 		addres.put("no", "7");
