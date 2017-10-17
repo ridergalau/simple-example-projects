@@ -8,14 +8,11 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.mapred.TableInputFormat;
 import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
 import org.apache.hadoop.hbase.util.Bytes;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 
 public class DriverReduceByKey {
 	public static void main(String[] args) throws Exception {
-//		final String hMaster = "namenode02.cluster4.ph,namenode01.cluster4.ph";
-//		final String quorum = "datanode01.cluster4.ph,namenode02.cluster4.ph,namenode01.cluster4.ph";
 
 		final String hMaster = "localhost";
 		final String quorum = "localhost:2181";

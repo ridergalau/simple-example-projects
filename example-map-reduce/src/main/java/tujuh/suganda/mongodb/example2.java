@@ -43,9 +43,5 @@ public class example2 {
 	    		for (DBObject o : cars.results()) {
 //	    			coll.insert(o);
 	    			System.out.println(o.toString());
-
-	    
-
-
 	}
 }}

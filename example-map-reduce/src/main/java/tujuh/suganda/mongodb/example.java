@@ -21,16 +21,6 @@ public class example {
 		// get the car collection
 		DBCollection coll = db.getCollection("car");
 
-		// map function to categorize overspeed cars
-//		String carMap = "function (){" + "var criteria;" + "if ( this.speed > 70 ) {" + "criteria = 'overspeed';"
-//				+ "emit(criteria,this.speed);" + "}" + "};";
-//System.out.println(carMap);
-//		// reduce function to add all the speed and calculate the average speed
-//
-//		String carReduce = "function(key, speed) {" + "var total =0;" + "for (var i = 0; i < speed.length; i++) {"
-//				+ "total = total+speed[i];" + "}" + "return total/speed.length;" + "};";
-//System.out.println(carReduce);
-
 		String map ="function () {"+
 	            "emit('size', {count:1});"+
 	    "}";
