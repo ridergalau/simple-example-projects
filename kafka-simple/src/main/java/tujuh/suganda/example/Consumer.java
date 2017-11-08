@@ -16,9 +16,8 @@ import org.apache.kafka.common.TopicPartition;
 public class Consumer {
 	public static void main(String[] args) {
 		Properties props = new Properties();
-//		props.put("bootstrap.servers", "tujuh-pc:9092");
-		props.put("bootstrap.servers", "l=master02.cluster2.ph:6667,namenode01.cluster2.ph:6667,namenode02.cluster2.ph:6667");
-
+		props.put("bootstrap.servers", "tujuh-pc:9092");
+		
 		props.put("group.id", "group." + UUID.randomUUID().toString());
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
@@ -29,7 +28,7 @@ public class Consumer {
 
 
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-		consumer.subscribe(Arrays.asList("twitter-profiling", "sc-fb-about"));
+		consumer.subscribe(Arrays.asList("topic-1", "topic-x"));
 		while (true) {
 			ConsumerRecords<String, String> records = consumer.poll(100);
 			for (ConsumerRecord<String, String> record : records)

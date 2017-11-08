@@ -25,14 +25,14 @@ public class SparkStreamingKafka {
 		rootLogger.setLevel(Level.OFF);
 
 		Map<String, Object> kafkaParams = new HashMap<>();
-		kafkaParams.put("bootstrap.servers", "l=master02.cluster2.ph:6667,namenode01.cluster2.ph:6667,namenode02.cluster2.ph:6667");
+		kafkaParams.put("bootstrap.servers", "l=server:2181,server2:2181,server3:2181");
 		kafkaParams.put("key.deserializer", StringDeserializer.class);
 		kafkaParams.put("value.deserializer", StringDeserializer.class);
 		kafkaParams.put("group.id", "kafkaConsumer2");
 		kafkaParams.put("auto.offset.reset", "earliest");
 		kafkaParams.put("enable.auto.commit", false);
 
-		Collection<String> topics = Arrays.asList("twitter-profiling", "sc-fb-about");
+		Collection<String> topics = Arrays.asList("topic-0", "topic-1");
 
 		JavaInputDStream<ConsumerRecord<String, String>> stream = KafkaUtils.createDirectStream(jssc,
 				LocationStrategies.PreferConsistent(),
