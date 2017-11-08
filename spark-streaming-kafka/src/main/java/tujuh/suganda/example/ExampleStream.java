@@ -34,6 +34,7 @@ public class ExampleStream implements Serializable {
 				new Duration(1000));
 		Logger rootLogger = Logger.getRootLogger();
 		rootLogger.setLevel(Level.OFF);
+		
 		JavaPairReceiverInputDStream<String, String> messages = KafkaUtils
 				.createStream(jssc, zkHost, groupName, getTopicKafka());
 

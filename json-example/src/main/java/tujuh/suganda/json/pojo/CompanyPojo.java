@@ -1,5 +1,6 @@
 package tujuh.suganda.json.pojo;
 
+import java.util.List;
 import java.util.Map;
 
 public class CompanyPojo {
@@ -8,7 +9,14 @@ public class CompanyPojo {
 	private String company;
 	private String bos;
 	private String address;
+	private List<String> childcompany;
 	
+	public List<String> getChildcompany() {
+		return childcompany;
+	}
+	public void setChildcompany(List<String> childcompany) {
+		this.childcompany = childcompany;
+	}
 	public String getAddress() {
 		return address;
 	}

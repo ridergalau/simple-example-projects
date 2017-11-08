@@ -15,8 +15,9 @@ import tujuh.suganda.json.pojo.*;
 public class BuildJsonWithPojo {
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
-
 		SimplePojo sModel = exampleData();
+		
+		//create Pojo to JsonString 
 		String jsonString = mapper.writeValueAsString(sModel);
 		System.out.println("Json -> " + jsonString);
 		

@@ -1,6 +1,5 @@
 package tujuh.suganda.json;
 
-import org.codehaus.jackson.map.ser.std.ObjectArraySerializer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
