@@ -11,11 +11,13 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 
 public class CreateTableHbase {
 public static void main(String[] args) throws IOException {
+	final String hMaster = "yourHmaster";
+	final String quorum = "yourZookeeper";
 	try {
 		Configuration conf = HBaseConfiguration.create();
-	    conf.set("hbase.master", "namenode02.cluster3.ph");
+	    conf.set("hbase.master", hMaster);
 	    conf.setInt("timeout", 5000);
-	    conf.set("hbase.zookeeper.quorum", "namenode02.cluster3.ph,namenode03.cluster3.ph,master03.cluster3.ph");
+	    conf.set("hbase.zookeeper.quorum", quorum);
 	    conf.set("zookeeper.znode.parent", "/hbase-unsecure");
 
 	    // Instantiating HbaseAdmin class
@@ -23,7 +25,7 @@ public static void main(String[] args) throws IOException {
 
 	    // Instantiating table descriptor class
 	    HTableDescriptor tableDescriptor = new
-	    HTableDescriptor(TableName.valueOf("tw_pilkada"));
+	    HTableDescriptor(TableName.valueOf("name-table"));
 
 	    // Adding column families to table descriptor
 	    tableDescriptor.addFamily(new HColumnDescriptor("data_tw"));

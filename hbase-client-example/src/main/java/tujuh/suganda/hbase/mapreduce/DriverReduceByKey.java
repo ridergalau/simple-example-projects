@@ -14,9 +14,6 @@ import org.apache.hadoop.mapreduce.Job;
 
 public class DriverReduceByKey {
 	public static void main(String[] args) throws Exception {
-//		final String hMaster = "namenode02.cluster4.ph,namenode01.cluster4.ph";
-//		final String quorum = "datanode01.cluster4.ph,namenode02.cluster4.ph,namenode01.cluster4.ph";
-
 		final String hMaster = "localhost";
 		final String quorum = "localhost:2181";
 		Configuration conf = HBaseConfiguration.create();

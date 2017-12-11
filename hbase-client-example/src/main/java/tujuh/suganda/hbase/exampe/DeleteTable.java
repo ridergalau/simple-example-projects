@@ -9,10 +9,13 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 
 public class DeleteTable {
 public static void main(String[] args) throws IOException {
+	final String hMaster = "yourHmaster";
+	final String quorum = "yourZookeeper";
+	
 	Configuration conf = HBaseConfiguration.create();
-    conf.set("hbase.master", "namenode02.cluster3.ph");
+    conf.set("hbase.master", hMaster);
     conf.setInt("timeout", 5000);
-    conf.set("hbase.zookeeper.quorum", "namenode02.cluster3.ph,namenode03.cluster3.ph,master03.cluster3.ph");
+    conf.set("hbase.zookeeper.quorum", quorum);
     conf.set("zookeeper.znode.parent", "/hbase-unsecure");
 
     HBaseAdmin admin = new HBaseAdmin(conf);

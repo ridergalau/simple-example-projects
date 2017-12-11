@@ -9,20 +9,20 @@ import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
-public class ScanHbase {
-public static void main(String[] args) {
+public class ScanHbaseFIlter {
+	private final static String HMASTER = "yourHmaster";
+	private final static String ZOOKEEPER = "yourZookeeper";
+	public static void main(String[] args) {
 	
-	final String hMaster = "namenode02.cluster4.ph,namenode01.cluster4.ph";
-	final String quorum = "datanode01.cluster4.ph,namenode02.cluster4.ph,namenode01.cluster4.ph";
     try {
     	Configuration conf = HBaseConfiguration.create();
-        conf.set("hbase.master", hMaster);
+        conf.set("hbase.master", HMASTER);
         conf.setInt("timeout", 5000);
-        conf.set("hbase.zookeeper.quorum", quorum);
+        conf.set("hbase.zookeeper.quorum", ZOOKEEPER);
         conf.set("zookeeper.znode.parent", "/hbase-unsecure");	    
 	    System.out.println("Konek");
 	    
-	    HTable table = new HTable(conf, "ipa-cc-twpost");
+	    HTable table = new HTable(conf, "the-table");
 	   
 	    final byte[] CF = "0".getBytes();
 	    final byte[] qualifier = "data".getBytes();
@@ -53,7 +53,7 @@ public static void main(String[] args) {
 	    	  for(KeyValue keyValue : r.list()) {
 	    		  String key = Bytes.toString(keyValue.getRow());
 	    		  System.out.println(key);
-	    		  System.out.println("Qualifier : " + keyValue.getKey() + " : Value : " + Bytes.toString(keyValue.getValue()));
+	    		  System.out.println("Qualifier : " + Bytes.toString(keyValue.getQualifier()) + " : Value : " + Bytes.toString(keyValue.getValue()));
 	    	    }
 	      }
 	    } finally {
