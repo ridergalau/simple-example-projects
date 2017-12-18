@@ -16,7 +16,7 @@ import org.apache.kafka.common.TopicPartition;
 public class Consumer {
 	public static void main(String[] args) {
 		Properties props = new Properties();
-		props.put("bootstrap.servers", "l=datanode01.cluster4.ph:6667,namenode01.cluster4.ph:6667,namenode02.cluster4.ph:6667,kafka01.cluster4.ph:6667");
+		props.put("bootstrap.servers", "l=localhost:9092,localhost2:9092");
 		
 		props.put("group.id", "group." + UUID.randomUUID().toString());
 		props.put("enable.auto.commit", "true");
@@ -28,7 +28,7 @@ public class Consumer {
 
 
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-		consumer.subscribe(Arrays.asList("ipa_clustering_tw", "topic-x"));
+		consumer.subscribe(Arrays.asList("mytopic", "topic-x"));
 		while (true) {
 			ConsumerRecords<String, String> records = consumer.poll(100);
 			for (ConsumerRecord<String, String> record : records)

@@ -26,7 +26,7 @@ public class ConsumeByTimes {
 	public static void main(String[] args) {
 		Date date = new Date();
 		Properties props = new Properties();
-		props.put("bootstrap.servers", "192.168.20.122:6667");
+		props.put("bootstrap.servers", "localhost:9092");
 		props.put("group.id", "group." + UUID.randomUUID().toString());
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
@@ -49,7 +49,7 @@ System.out.println( Instant.now().minus(2, MINUTES).toEpochMilli());
 			query.put(topicPartition, Instant.now().minus(1, MINUTES).toEpochMilli());
 		}
 
-		consumer.subscribe(Arrays.asList("ipa_clustering_tw"));
+		consumer.subscribe(Arrays.asList("mytopic"));
 //		consumer.offsetsForTimes(query);
 
 		while (true) {

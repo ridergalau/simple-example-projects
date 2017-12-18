@@ -18,7 +18,7 @@ public class TestByTImes {
 public static void main(String[] args) {
 	
 	Properties props = new Properties();
-	props.put("bootstrap.servers", "l=datanode01.cluster4.ph:6667,namenode01.cluster4.ph:6667,namenode02.cluster4.ph:6667,kafka01.cluster4.ph:6667");
+	props.put("bootstrap.servers", "l=localhost:9092,localhost4:9092");
 	props.put("group.id", "group." + UUID.randomUUID().toString());
 	props.put("enable.auto.commit", "true");
 	props.put("auto.commit.interval.ms", "1000");
