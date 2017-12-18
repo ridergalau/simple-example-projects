@@ -9,7 +9,7 @@ import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 public class KafkaConfig {
-	static final String BOOTSTRAP_SERVERS ="localhost:6667";
+	static final String BOOTSTRAP_SERVERS ="192.168.20.122:6667";
 	public static Producer<Long, String> createProducer() {
 		Properties props = new Properties();
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,BOOTSTRAP_SERVERS);

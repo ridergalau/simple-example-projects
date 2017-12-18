@@ -2,6 +2,7 @@ package tujuh.suganda.example;
 
 import java.util.*;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.*;
 import org.apache.spark.streaming.Duration;
 import org.apache.spark.streaming.api.java.*;
@@ -10,7 +11,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
 import scala.Tuple2;
 
 public class SparkStreamingKafka {
@@ -25,14 +25,14 @@ public class SparkStreamingKafka {
 		rootLogger.setLevel(Level.OFF);
 
 		Map<String, Object> kafkaParams = new HashMap<>();
-		kafkaParams.put("bootstrap.servers", "l=server:2181,server2:2181,server3:2181");
+		kafkaParams.put("bootstrap.servers", "l=192.168.20.122:6667");
 		kafkaParams.put("key.deserializer", StringDeserializer.class);
 		kafkaParams.put("value.deserializer", StringDeserializer.class);
 		kafkaParams.put("group.id", "kafkaConsumer2");
-		kafkaParams.put("auto.offset.reset", "earliest");
+		kafkaParams.put("auto.offset.reset", "latest");
 		kafkaParams.put("enable.auto.commit", false);
 
-		Collection<String> topics = Arrays.asList("topic-0", "topic-1");
+		Collection<String> topics = Arrays.asList("ipa_clustering_tw", "topic-1");
 
 		JavaInputDStream<ConsumerRecord<String, String>> stream = KafkaUtils.createDirectStream(jssc,
 				LocationStrategies.PreferConsistent(),
@@ -43,8 +43,16 @@ public class SparkStreamingKafka {
 		JavaDStream<String> lines = stream.map(new Function<ConsumerRecord<String,String>, String>() {
 			@Override
 			public String call(ConsumerRecord<String, String> v1) throws Exception {
-				System.out.println(v1.topic()+"  =====> "+v1.value());
-				return null;
+//				System.out.println(v1.topic()+"  =====> "+v1.value());
+//				System.out.println(v1.value());
+				return v1.value();
+			}
+		});
+		
+		lines.foreachRDD(new VoidFunction<JavaRDD<String>>() {
+			@Override
+			public void call(JavaRDD<String> t) throws Exception {
+				System.out.println("- "+t);
 			}
 		});
 		

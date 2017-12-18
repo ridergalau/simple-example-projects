@@ -1,5 +1,7 @@
 package tujuh.suganda;
 
+import java.util.Date;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.KeyValue;
@@ -33,18 +35,18 @@ public class BulkLoadHbaseSpark {
 		config.set("zookeeper.znode.parent", "/hbase-unsecure");
 		config.setInt("timeout", 5000);
 		config.set("hbase.zookeeper.quorum", ZOOKEEPER);
-		config.set(TableInputFormat.INPUT_TABLE, "ipa-cc-twpost");
+		config.set(TableInputFormat.INPUT_TABLE, "sna-counter");
 		config.set(TableInputFormat.SCAN_COLUMN_FAMILY, "0");
 
 		// config.set(TableInputFormat.SCAN_COLUMNS, "0:tweet");
 
 		// Range RowKey
-		// config.set(TableInputFormat.SCAN_ROW_START, "20171101");
-		// config.set(TableInputFormat.SCAN_ROW_STOP, "20171107");
+//		 config.set(TableInputFormat.SCAN_ROW_START, "20171101");
+//		 config.set(TableInputFormat.SCAN_ROW_STOP, "20171107");
 
 		// Time Range
-		// config.setLong(TableInputFormat.SCAN_TIMERANGE_START, 0);
-		// config.setLong(TableInputFormat.SCAN_TIMERANGE_END, 1);
+		 config.setLong(TableInputFormat.SCAN_TIMERANGE_START, new Date().getTime() - (60*60*1000) );
+		 config.setLong(TableInputFormat.SCAN_TIMERANGE_END, new Date().getTime());
 
 		System.out.println("LOADING  . . . . . . ");
 		JavaPairRDD<ImmutableBytesWritable, Result> hBaseRDD = jsc.newAPIHadoopRDD(config, TableInputFormat.class,
@@ -69,10 +71,12 @@ public class BulkLoadHbaseSpark {
 		Dataset<Row> schemaRDD = sqlContext
 				.createDataset(JavaPairRDD.toRDD(rowPairRDD), Encoders.tuple(Encoders.STRING(), Encoders.STRING()))
 				.toDF();
-		schemaRDD.createOrReplaceTempView("data");
-		Dataset<Row> tempTable = sqlContext.sql("select * from data where _1 LIKE '20171102%'");
-
-		tempTable.show();
+		schemaRDD.show();
+		
+//		schemaRDD.createOrReplaceTempView("data");
+//		Dataset<Row> tempTable = sqlContext.sql("select * from data where _1 LIKE '20171102%'");
+//
+//		tempTable.show();
 
 		// schemaRDD.foreach((ForeachFunction<Row>) row -> System.out.println(row));
 		System.out.println("----FINISH----");

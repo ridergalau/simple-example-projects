@@ -21,7 +21,7 @@ public void map(ImmutableBytesWritable rowKey, Result columns, Context context)
 			// set new key having only date
 			String oKey = inKey.split("_")[0];
 			
-			// get sales column in byte format first and then convert it to string (as it is
+			// get sales column in byte format first and then outconvert it to string (as it is
 			// stored as string from hbase shell)
 			byte[] bSales = columns.getValue(Bytes.toBytes("0"), Bytes.toBytes("data"));
 			String sSales = new String(bSales);

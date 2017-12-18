@@ -25,7 +25,7 @@ import java.util.Iterator;
 
 public class ExampleTwitterStreaming {
 	static KafkaService Kafka = new KafkaService();
-	static NsqService Nsq = new NsqService();
+//	static NsqService Nsq = new NsqService();
 
 	public static void main(String[] args) {
 
@@ -35,21 +35,27 @@ public class ExampleTwitterStreaming {
 		 */
 		String[] filters = new String[] { "jokowi", "indonesia", "polri", "polisi" };
 
-		String consumerKey = args[0];
-		String consumerSecret = args[1];
-		String accessToken = args[2];
-		String accessTokenSecret = args[3];
+//		String consumerKey = args[0];
+//		String consumerSecret = args[1];
+//		String accessToken = args[2];
+//		String accessTokenSecret = args[3];
+//
+//		System.setProperty("twitter4j.oauth.consumerKey", consumerKey);
+//		System.setProperty("twitter4j.oauth.consumerSecret", consumerSecret);
+//		System.setProperty("twitter4j.oauth.accessToken", accessToken);
+//		System.setProperty("twitter4j.oauth.accessTokenSecret", accessTokenSecret);
 
-		System.setProperty("twitter4j.oauth.consumerKey", consumerKey);
-		System.setProperty("twitter4j.oauth.consumerSecret", consumerSecret);
-		System.setProperty("twitter4j.oauth.accessToken", accessToken);
-		System.setProperty("twitter4j.oauth.accessTokenSecret", accessTokenSecret);
 
-		SparkConf sparkConf = new SparkConf().setAppName("JavaExampleSparkStreamTwitter");
+		System.setProperty("twitter4j.oauth.consumerKey", "nUKkFZ7aEwnnpmpR0SmJsidHI");
+		System.setProperty("twitter4j.oauth.consumerSecret", "fUaKgtJCE0Btrljgq844CsfFPwlRYMiC6REbTPS3dm4f50d4e8");
+		System.setProperty("twitter4j.oauth.accessToken", "892336234160193536-knj2aaB4CCIp2U5sHFE0O39EMSJqOzT");
+		System.setProperty("twitter4j.oauth.accessTokenSecret", "BsWPxAbvE2MlDpnFkqgnz6fVDj8pkmUuwE58Y0Lq5hkMm");
 
-		if (!sparkConf.contains("spark.master")) {
-			sparkConf.setMaster("local[3]");
-		}
+		SparkConf sparkConf = new SparkConf();
+
+//		if (!sparkConf.contains("spark.master")) {
+//			sparkConf.setMaster("local[3]");
+//		}
 
 		JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, new Duration(2000));
 		JavaReceiverInputDStream<Status> stream = TwitterUtils.createStream(jssc, filters);
@@ -82,7 +88,7 @@ public class ExampleTwitterStreaming {
 					@Override
 					public void call(String arg0) throws Exception {
 						// Stored to Nsq
-						Nsq.insert("aing", arg0);
+//						Nsq.insert("aing", arg0);
 						// Stored to Kafka
 						Kafka.insert(arg0);
 					}

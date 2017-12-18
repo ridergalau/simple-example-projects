@@ -16,8 +16,9 @@ public class DriverReduceByKey {
 
 		final String hMaster = "localhost";
 		final String quorum = "localhost:2181";
+		
 		Configuration conf = HBaseConfiguration.create();
-		conf.set("hbase.master", hMaster);
+//		conf.set("hbase.master", hMaster);
 		conf.setInt("timeout", 150000);
 		conf.set("hbase.zookeeper.quorum", quorum);
 		conf.set("zookeeper.znode.parent", "/hbase");

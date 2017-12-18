@@ -23,11 +23,11 @@ import tujuh.suganda.model.SimpleModel;
 public class InsertHbaseSpark {
 	final static String HMASTER = "your-master";
 	final static String ZOOKEEPER = "your-zookeeper";
-
+	static SparkSession spark = SparkSession.builder().master("local").appName("OrientDBSparkConnector").getOrCreate();
+	static JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
+	final SQLContext sqlContext = new SQLContext(sc);
 	public static void main(String[] args) throws IOException {
-		SparkSession spark = SparkSession.builder().master("local").appName("OrientDBSparkConnector").getOrCreate();
-		JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
-		final SQLContext sqlContext = new SQLContext(sc);
+		
 		Logger rootLogger = Logger.getRootLogger();
 		rootLogger.setLevel(Level.ERROR);
 		JavaRDD<SimpleModel> dataRdd = sc.textFile("src/main/resources/simple.csv")
@@ -42,6 +42,7 @@ public class InsertHbaseSpark {
 						return model;
 					}
 				});
+		
 		saveHbase(dataRdd);
 	}
 
@@ -58,6 +59,7 @@ public class InsertHbaseSpark {
 						return new Tuple2<ImmutableBytesWritable, Put>(new ImmutableBytesWritable(), p);
 					}
 				});
+		
 		Job job = setInit();
 		putData.saveAsNewAPIHadoopDataset(job.getConfiguration());
 		System.out.println("Success..");

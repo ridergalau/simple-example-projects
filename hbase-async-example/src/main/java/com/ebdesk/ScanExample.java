@@ -20,7 +20,7 @@ public class ScanExample {
 		conf.overrideConfig("hbase.client.retries.number", "10");
 
 		final HBaseClient client = new HBaseClient(conf);
-		final byte[] table = "sna-network".getBytes();
+		final byte[] table = "sna-counter".getBytes();
 
 		// List<ScanFilter> filters = new ArrayList<ScanFilter>();
 		// filters.add(new RowFilter(CompareOp.EQUAL, new RegexStringComparator("")));
@@ -32,8 +32,9 @@ public class ScanExample {
 		final Scanner scanner = client.newScanner(table);
 		scanner.setFamily("0");
 		scanner.setTimeRange(new Date().getTime() - (60*60*1000), new Date().getTime());
+		
 		// scanner.setQualifier("1");
-		scanner.setMaxNumRows(1);
+//		scanner.setMaxNumRows(1);
 		
 		// Scan By key regex (Contains)
 		// scanner.setKeyRegexp("23");

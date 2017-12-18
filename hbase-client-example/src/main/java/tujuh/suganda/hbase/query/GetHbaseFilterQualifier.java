@@ -34,7 +34,6 @@ public class GetHbaseFilterQualifier {
 
 			// Find all columns Qualifier in a row and family that start with "examp" or "coba"
 			byte[][] prefixes = new byte[][] { Bytes.toBytes("ebde"), Bytes.toBytes("c")};
-			System.out.println("Prefixes --> "+prefixes[0].toString());
 			Filter filterSet = new MultipleColumnPrefixFilter(prefixes);
 			g.setFilter(filterSet);
 

@@ -26,7 +26,7 @@ public class ConsumeByTimes {
 	public static void main(String[] args) {
 		Date date = new Date();
 		Properties props = new Properties();
-		props.put("bootstrap.servers", "localhost:9092");
+		props.put("bootstrap.servers", "192.168.20.122:6667");
 		props.put("group.id", "group." + UUID.randomUUID().toString());
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
@@ -34,29 +34,54 @@ public class ConsumeByTimes {
 		props.put("session.timeout.ms", "30000");
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
- 
-		
-		TopicPartition topicPartition = new TopicPartition("test1", 0);
-		Map<TopicPartition, Long> ini = new HashMap<>();
-		ini.put(topicPartition, Long.valueOf("1509421528146"));
 
+		//
+		// TopicPartition topicPartition = new TopicPartition("test", 0);
+		// Map<TopicPartition, Long> ini = new HashMap<>();
+		// ini.put(topicPartition, Long.valueOf("1509421528146"));
+		//
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-		consumer.subscribe(Arrays.asList("test1"));
+System.out.println( Instant.now().minus(2, MINUTES).toEpochMilli());
+		Map<TopicPartition, Long> query = new HashMap<>();
+		Set<TopicPartition> assignments = consumer.assignment();
 
-//		Map<TopicPartition, OffsetAndTimestamp> records = consumer.offsetsForTimes(ini);
-//		for (Entry<TopicPartition, OffsetAndTimestamp> xx : records.entrySet()) {
-//			System.out.println(xx);
-//		}
+		for (TopicPartition topicPartition : assignments) {
+			query.put(topicPartition, Instant.now().minus(1, MINUTES).toEpochMilli());
+		}
 
-		Map<TopicPartition, OffsetAndTimestamp> result = consumer.offsetsForTimes(ini);
+		consumer.subscribe(Arrays.asList("ipa_clustering_tw"));
+//		consumer.offsetsForTimes(query);
 
- 
+		while (true) {
+			ConsumerRecords<String, String> records = consumer.poll(100);
+			
+			for (ConsumerRecord<String, String> record : records)
+				System.out.printf("topic = %s, value = %s, timestamp = %s", record.topic(),
+						record.value(), record.timestamp() + "\n");
+		}
 		
-		
-		result.forEach((topic,offset) -> 
-		System.out.println("Offset for topic=" + topic.topic() + ", partition=" + topic.partition()
-						+" offset=" + offset.offset() + ", Timestamp="
-						+ offset.timestamp())
-		);
+		//
+
+		// Map<TopicPartition, OffsetAndTimestamp> records =
+		// consumer.offsetsForTimes(ini);
+		// for (Entry<TopicPartition, OffsetAndTimestamp> xx : records.entrySet()) {
+		// System.out.println(xx);
+		// }
+
+		// Map<TopicPartition, OffsetAndTimestamp> result =
+		// consumer.offsetsForTimes(query);
+		//
+		// result.entrySet().stream().forEach(entry -> consumer.seek(entry.getKey(),
+		// Optional.ofNullable(entry.getValue()).map(OffsetAndTimestamp::offset).orElse(new
+		// Long(0))));
+		//
+		// System.out.println(" -- " + result.values());
+
+		// result.forEach((topic,offset) ->
+		// System.out.println("Offset for topic=" + topic.topic() + ", partition=" +
+		// topic.partition()
+		// +" offset=" + offset.offset() + ", Timestamp="
+		// + offset.timestamp())
+		// );
 	}
 }

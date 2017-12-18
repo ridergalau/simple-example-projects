@@ -1,4 +1,4 @@
-package tujuh.suganda.service;
+/*package tujuh.suganda.service;
 
 import java.util.concurrent.TimeoutException;
 
@@ -21,3 +21,4 @@ public class NsqService {
 		}
 	}
 }
+*/

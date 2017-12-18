@@ -1,4 +1,4 @@
-package tujuh.suganda.config;
+/*package tujuh.suganda.config;
 
 import com.github.brainlag.nsq.NSQProducer;
 
@@ -10,3 +10,4 @@ public class NsqConfig {
 		return producer;
 	}
 }
+*/

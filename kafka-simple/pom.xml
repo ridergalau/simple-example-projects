@@ -1,20 +1,21 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>tujuh-suganda</groupId>
-  <artifactId>kafka-simple</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>kafka-simple</name>
-  <description>kafka-simple-example</description>
-  <dependencies>
-  <dependency>
-    <groupId>org.apache.kafka</groupId>
-    <artifactId>kafka-clients</artifactId>
-    <version>0.10.2.1</version>
-</dependency>
-  <dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tujuh-suganda</groupId>
+	<artifactId>kafka-simple</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>kafka-simple</name>
+	<description>kafka-simple-example</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>0.10.2.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka-streams</artifactId>
-			<version>0.10.2.1</version>
+			<version>0.10.2.0</version>
 		</dependency>
-  </dependencies>
+	</dependencies>
 </project>

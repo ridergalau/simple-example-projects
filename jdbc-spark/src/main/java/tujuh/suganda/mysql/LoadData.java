@@ -30,7 +30,7 @@ public class LoadData implements Serializable {
 		Map<String, String> options = new HashMap<>();
 		options.put("driver", MYSQL_DRIVER);
 		options.put("url", MYSQL_CONNECTION_URL);
-		options.put("dbtable", "(SELECT * FROM `data`) as data");
+		options.put("dbtable", "(SELECT * FROM `employetext`) as data");
 		options.put("partitionColumn", "id");
 		options.put("lowerBound", "10001");
 		options.put("upperBound", "499999");
@@ -43,6 +43,7 @@ public class LoadData implements Serializable {
 		for (Row employeeFullNameRow : employeeFullNameRows) {
 			System.out.println("-> " + employeeFullNameRow);
 		}
+		
 
 	}
 }
